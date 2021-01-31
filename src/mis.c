@@ -1,5 +1,5 @@
 int ainit(){
-pcm_name = strdup("plughw:0,0");
+pcm_name = strdup("default");
 snd_pcm_hw_params_alloca(&hwparams);
 if (snd_pcm_open(&pcm_handle, pcm_name, stream, 0) < 0) {
 	fprintf(stderr, "Error opening PCM device %s\n", pcm_name);
@@ -39,7 +39,7 @@ if (snd_pcm_hw_params_set_channels(pcm_handle, hwparams, 2) < 0) {
 }
 
 /* Set number of periods. Periods used to be called fragments. */ 
-if (snd_pcm_hw_params_set_periods(pcm_handle, hwparams, periods, 0) < 0) {
+if (snd_pcm_hw_params_set_periods_near(pcm_handle, hwparams, &periods, NULL) < 0) {
 	fprintf(stderr, "Error setting periods.\n");
 	return 1;
 }
