@@ -116,6 +116,7 @@ case ButtonPress:
 case ButtonRelease:
 	for(int i=0;i<WK;i++) if(xev.xbutton.window==white[i]) playing=0, pk=0;
 	for(int i=0;i<BK;i++) if(xev.xbutton.window==black[i]) playing=0, pk=0;
+	break;
 case ClientMessage:
 	if (xev.xclient.data.l[0] == wm_delete_window) {
 		done=1;
@@ -163,8 +164,8 @@ case KeyPress:
 		playing=1;
 		pthread_cond_signal(&playingcond);
 		pk=1;
-		break;
 	}
+	break;
 case KeyRelease:
 	playing=0, pk=0;
 	break;
@@ -195,6 +196,7 @@ case MotionNotify:
 			break;
 		}
 	}
+	break;
 }
 }
 xclose();
